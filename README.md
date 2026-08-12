@@ -2,141 +2,196 @@
 
 ## Project Overview
 
-This project delivers a comprehensive business intelligence solution for Adventure Works using Power BI. The dashboard is designed to provide executives and business stakeholders with a clear view of revenue performance, profitability, sales trends, customer behavior, and product category performance.
+This project delivers a comprehensive business intelligence solution for Adventure Works using Power BI. The dashboard provides executives and business users with actionable insights into revenue, profitability, product performance, customer trends, and sales growth.
 
-The report enables users to monitor key business KPIs, analyze year-over-year growth, evaluate profit margins, and identify revenue-driving product categories through interactive visualizations and filters.
+The report is divided into two interactive pages that support both high-level strategic analysis and detailed operational insights.
 
 ---
 
-## Dashboard Pages
+# Dashboard Pages
 
-### 1. Executive Summary
+## 1. Executive Summary
 
-This page serves as the strategic overview of the business, presenting high-level performance metrics and category-based profitability insights.
+The Executive Summary page provides a high-level overview of business performance, allowing decision-makers to quickly assess financial health and category-level profitability.
 
-#### Key Metrics
+### Key Metrics
+
 - **Total Revenue:** $24.91M
 - **Total Profit:** $10.46M
 - **Profit Margin %:** 41.97%
 - **Revenue YoY Growth %:** 58.40%
 
-#### Key Insights
-- Tracks total revenue performance across years.
-- Highlights revenue contribution by product category.
-- Compares profit margins across product categories.
-- Shows cost distribution by product category.
-- Interactive filters for Year and Product Category allow focused analysis.
+### Key Insights
 
-**Visuals Included**
-- KPI Cards
-- Revenue Trend by Year
-- Total Revenue by Product Category
-- Profit Margin % by Product Category
-- Total Cost by Product Category
+- Revenue growth trend across multiple years.
+- Category-level revenue comparison.
+- Profit margin analysis by product category.
+- Cost analysis by category.
+- Interactive filtering by Year and Product Category.
 
-*Caption: Executive Summary dashboard displaying overall financial performance, category profitability, revenue growth, and cost analysis.*
+### Dashboard Screenshot
+
+images/Executive-Summary.png
+
+*Executive Summary page showing revenue, profit, profit margin, year-over-year growth, category revenue analysis, and cost distribution.*
 
 ---
 
-### 2. Detailed Insights
+## 2. Detailed Insights
 
-This page provides a deeper operational analysis, focusing on sales volume, order patterns, product performance, and customer segmentation.
+The Detailed Insights page focuses on operational performance, sales volume analysis, customer segmentation, and year-over-year revenue comparisons.
 
-#### Key Metrics
+### Key Metrics
+
 - **Total Quantity Sold:** 84K
 - **Total Orders:** 56K
 - **Total Cost:** $14.46M
 - **Revenue YTD:** $9.19M
 
-#### Key Insights
-- Analyzes trends in total quantity sold and order volumes over time.
-- Compares monthly revenue performance against the previous year.
-- Breaks down product quantity sold by category.
-- Evaluates customer purchasing behavior based on education level.
-- Displays total orders, quantity sold, revenue, and profit margin in a customer performance matrix.
+### Key Insights
 
-**Visuals Included**
-- KPI Cards
-- Quantity Sold & Orders Trend
-- Year-over-Year Revenue Comparison
-- Product Quantity Distribution Donut Chart
-- Customer Performance Matrix
+- Sales quantity and order volume trends.
+- Monthly Year-over-Year revenue comparison.
+- Product quantity distribution by category.
+- Customer performance analysis by education level.
+- Revenue and profitability contribution across customer groups.
 
-*Caption: Detailed Insights dashboard showing sales trends, revenue comparisons, product category contributions, and customer performance analytics.*
+### Dashboard Screenshot
+
+images/Detailed-Insights.png
+
+*Detailed Insights page displaying sales trends, revenue comparisons, product quantity analysis, and customer performance metrics.*
 
 ---
 
-## Data Model
+# Data Model
 
-The report is built using a star-schema-based data model designed for efficient analytics and scalable reporting.
+The dashboard follows a Star Schema design to ensure efficient reporting and optimized performance.
 
-### Core Tables
+### Fact Table
+
 - Fact Sales
-- Product Dimension
-- Customer Dimension
-- Date Dimension
-- Territory/Region Dimension
+
+### Dimension Tables
+
+- Dim Date
+- Dim Product
+- Dim Customer
+- Dim Territory
 
 ### Model Features
-- Centralized fact table for sales transactions.
-- Dedicated Date Dimension supporting time intelligence calculations.
-- One-to-many relationships between dimensions and fact tables.
-- Optimized model for fast filtering and aggregation.
+
+- One-to-many relationships.
+- Dedicated Date table for Time Intelligence calculations.
+- Optimized filtering and aggregations.
+- Centralized measure table for DAX calculations.
 
 ---
 
-## Key DAX Calculations
+# Key DAX Measures
 
-### Sales & Profitability
-- Total Revenue
-- Total Cost
-- Total Profit
-- Profit Margin %
+### Financial Metrics
+
+```DAX
+Total Revenue = SUM(Sales[Revenue])
+
+Total Cost = SUM(Sales[Cost])
+
+Total Profit = [Total Revenue] - [Total Cost]
+
+Profit Margin % =
+DIVIDE([Total Profit],[Total Revenue],0)
+```
 
 ### Time Intelligence
-- Revenue YTD
-- Previous Year Revenue
-- Year-over-Year Revenue Growth %
-- Running Totals
 
-### Sales Performance
-- Total Orders
-- Total Quantity Sold
-- Category Contribution %
-- Revenue by Product Category
+```DAX
+Revenue YTD =
+TOTALYTD([Total Revenue],'Date'[Date])
 
----
+Revenue Previous Year =
+CALCULATE(
+    [Total Revenue],
+    SAMEPERIODLASTYEAR('Date'[Date])
+)
 
-## Dashboard Features
-
-- Interactive slicers for Year and Product Category.
-- Dynamic KPI calculations.
-- Year-over-Year trend analysis.
-- Customer segmentation analysis.
-- Product category performance evaluation.
-- Revenue and profitability monitoring.
-- Executive-friendly layout for quick decision-making.
+Revenue YoY Growth % =
+DIVIDE(
+    [Total Revenue]-[Revenue Previous Year],
+    [Revenue Previous Year]
+)
+```
 
 ---
 
-## How to Use This Dashboard
+# Dashboard Features
 
-1. Download the `.pbix` file from the repository.
-2. Open the file using **Power BI Desktop**.
-3. Navigate between the **Executive Summary** and **Detailed Insights** tabs.
-4. Use the **Year** and **Product Category** slicers to filter report data.
-5. Hover over visuals for additional insights and detailed metrics.
-6. Analyze trends and performance indicators to support business decision-making.
+✅ Interactive Year Slicers
+
+✅ Product Category Filtering
+
+✅ Dynamic KPI Cards
+
+✅ Revenue Trend Analysis
+
+✅ Profitability Analysis
+
+✅ Customer Performance Insights
+
+✅ Year-over-Year Revenue Tracking
+
+✅ Product Category Performance Evaluation
 
 ---
 
-## Business Value
+# How to Use
 
-This dashboard helps stakeholders:
+1. Download the `.pbix` file.
+2. Open the report using **Power BI Desktop**.
+3. Navigate between:
+   - Executive Summary
+   - Detailed Insights
+4. Use the Year and Product Category slicers to filter the report.
+5. Hover over visuals for additional insights.
+6. Drill into customer and category performance metrics.
 
-- Monitor organizational financial performance.
-- Track revenue growth and profitability.
-- Identify top-performing product categories.
-- Understand customer purchasing patterns.
-- Support strategic planning with data-driven insights.
-- Improve operational and sales performance through actionable analytics.
+---
+
+# Business Value
+
+This dashboard enables stakeholders to:
+
+- Monitor organizational performance.
+- Track profitability and revenue growth.
+- Identify top-performing products.
+- Evaluate customer purchasing behavior.
+- Support strategic business decisions through data-driven insights.
+- Improve operational and financial performance.
+
+---
+
+## Repository Structure
+
+```text
+Adventure-Works-PowerBI/
+│
+├── AdventureWorks.pbix
+├── README.md
+│
+├── images/
+│   ├── Executive-Summary.png
+│   └── Detailed-Insights.png
+│
+└── dataset/
+    └── AdventureWorks.xlsx
+```
+
+## Preview
+
+### Executive Summary
+
+images/Executive-Summary.png
+
+### Detailed Insights
+
+.png" width="900">
