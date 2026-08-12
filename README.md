@@ -2,112 +2,128 @@
 
 ## Project Overview
 
-This project delivers a comprehensive business intelligence solution for Adventure Works using Power BI. The dashboard provides executives and business users with actionable insights into revenue, profitability, product performance, customer trends, and sales growth.
+This project delivers an interactive business intelligence solution for **Adventure Works** using Power BI. The dashboard provides stakeholders with a comprehensive view of revenue performance, profitability, product category trends, customer behavior, and year-over-year business growth.
 
-The report is divided into two interactive pages that support both high-level strategic analysis and detailed operational insights.
+The report is designed to support executive decision-making through intuitive visualizations, KPI tracking, and interactive filtering capabilities.
 
 ---
 
-# Dashboard Pages
+## Dashboard Pages
 
-## 1. Executive Summary
+### 1. Executive Summary
 
-The Executive Summary page provides a high-level overview of business performance, allowing decision-makers to quickly assess financial health and category-level profitability.
+The Executive Summary page provides a high-level overview of organizational performance and profitability.
 
-### Key Metrics
-
+#### Key Metrics
 - **Total Revenue:** $24.91M
 - **Total Profit:** $10.46M
-- **Profit Margin %:** 41.97%
-- **Revenue YoY Growth %:** 58.40%
+- **Profit Margin:** 41.97%
+- **Revenue YoY Growth:** 58.40%
 
-### Key Insights
+#### Key Insights
+- Revenue trend analysis across 2015–2017.
+- Revenue contribution by product category.
+- Profit margin comparison across categories.
+- Product cost distribution analysis.
+- Interactive Year and Product Category filtering.
 
-- Revenue growth trend across multiple years.
-- Category-level revenue comparison.
-- Profit margin analysis by product category.
-- Cost analysis by category.
-- Interactive filtering by Year and Product Category.
-
-### Dashboard Screenshot
-
-images/Executive-Summary.png
-
-*Executive Summary page showing revenue, profit, profit margin, year-over-year growth, category revenue analysis, and cost distribution.*
+#### Visuals Included
+- KPI Cards
+- Revenue Trend by Year
+- Revenue by Product Category
+- Profit Margin by Category
+- Total Cost by Category
 
 ---
 
-## 2. Detailed Insights
+### 2. Detailed Insights
 
-The Detailed Insights page focuses on operational performance, sales volume analysis, customer segmentation, and year-over-year revenue comparisons.
+The Detailed Insights page focuses on operational sales performance and customer analytics.
 
-### Key Metrics
-
+#### Key Metrics
 - **Total Quantity Sold:** 84K
 - **Total Orders:** 56K
 - **Total Cost:** $14.46M
 - **Revenue YTD:** $9.19M
 
-### Key Insights
-
-- Sales quantity and order volume trends.
+#### Key Insights
+- Quantity sold and order trends by year.
 - Monthly Year-over-Year revenue comparison.
 - Product quantity distribution by category.
 - Customer performance analysis by education level.
-- Revenue and profitability contribution across customer groups.
+- Revenue and profitability contribution across customer segments.
 
-### Dashboard Screenshot
-
-images/Detailed-Insights.png
-
-*Detailed Insights page displaying sales trends, revenue comparisons, product quantity analysis, and customer performance metrics.*
+#### Visuals Included
+- KPI Cards
+- Quantity Sold & Orders Trend
+- Year-over-Year Revenue Comparison
+- Product Quantity Analysis
+- Customer Performance Matrix
 
 ---
 
-# Data Model
+## Dashboard Preview
 
-The dashboard follows a Star Schema design to ensure efficient reporting and optimized performance.
+Instead of static screenshots, an exported PDF containing all report pages has been included within the repository.
+
+📄 **Dashboard Preview:**  
+Adventure%20Works%20Pdf.pdf
+
+The PDF contains:
+- Executive Summary Page
+- Detailed Insights Page
+- Interactive dashboard layout preview
+- KPI and performance visualizations
+
+---
+
+## Data Model
+
+The dashboard follows a Star Schema design to ensure efficient performance and scalability.
 
 ### Fact Table
-
-- Fact Sales
+- Sales Fact Table
 
 ### Dimension Tables
-
-- Dim Date
-- Dim Product
-- Dim Customer
-- Dim Territory
+- Date Dimension
+- Product Dimension
+- Customer Dimension
+- Category Dimension
 
 ### Model Features
-
-- One-to-many relationships.
-- Dedicated Date table for Time Intelligence calculations.
-- Optimized filtering and aggregations.
-- Centralized measure table for DAX calculations.
+- One-to-Many Relationships
+- Time Intelligence Support
+- Optimized Filtering Performance
+- Centralized DAX Measures
 
 ---
 
-# Key DAX Measures
+## Key DAX Measures
 
 ### Financial Metrics
 
 ```DAX
-Total Revenue = SUM(Sales[Revenue])
+Total Revenue =
+SUM(Sales[Revenue])
 
-Total Cost = SUM(Sales[Cost])
+Total Cost =
+SUM(Sales[Cost])
 
-Total Profit = [Total Revenue] - [Total Cost]
+Profit =
+[Total Revenue] - [Total Cost]
 
 Profit Margin % =
-DIVIDE([Total Profit],[Total Revenue],0)
+DIVIDE([Profit],[Total Revenue],0)
 ```
 
 ### Time Intelligence
 
 ```DAX
 Revenue YTD =
-TOTALYTD([Total Revenue],'Date'[Date])
+TOTALYTD(
+    [Total Revenue],
+    'Date'[Date]
+)
 
 Revenue Previous Year =
 CALCULATE(
@@ -117,81 +133,20 @@ CALCULATE(
 
 Revenue YoY Growth % =
 DIVIDE(
-    [Total Revenue]-[Revenue Previous Year],
+    [Total Revenue] - [Revenue Previous Year],
     [Revenue Previous Year]
 )
 ```
 
 ---
 
-# Dashboard Features
+## Dashboard Features
 
-✅ Interactive Year Slicers
-
-✅ Product Category Filtering
-
-✅ Dynamic KPI Cards
-
-✅ Revenue Trend Analysis
-
-✅ Profitability Analysis
-
-✅ Customer Performance Insights
-
-✅ Year-over-Year Revenue Tracking
-
-✅ Product Category Performance Evaluation
-
----
-
-# How to Use
-
-1. Download the `.pbix` file.
-2. Open the report using **Power BI Desktop**.
-3. Navigate between:
-   - Executive Summary
-   - Detailed Insights
-4. Use the Year and Product Category slicers to filter the report.
-5. Hover over visuals for additional insights.
-6. Drill into customer and category performance metrics.
-
----
-
-# Business Value
-
-This dashboard enables stakeholders to:
-
-- Monitor organizational performance.
-- Track profitability and revenue growth.
-- Identify top-performing products.
-- Evaluate customer purchasing behavior.
-- Support strategic business decisions through data-driven insights.
-- Improve operational and financial performance.
-
----
-
-## Repository Structure
-
-```text
-Adventure-Works-PowerBI/
-│
-├── AdventureWorks.pbix
-├── README.md
-│
-├── images/
-│   ├── Executive-Summary.png
-│   └── Detailed-Insights.png
-│
-└── dataset/
-    └── AdventureWorks.xlsx
-```
-
-## Preview
-
-### Executive Summary
-
-images/Executive-Summary.png
-
-### Detailed Insights
-
-.png" width="900">
+- Interactive Year Slicers
+- Product Category Filters
+- Dynamic KPI Cards
+- Revenue Trend Analysis
+- Profitability Tracking
+- Customer Segmentation
+- Year-over-Year Revenue Analysis
+- 
